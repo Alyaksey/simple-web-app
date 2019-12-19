@@ -1,9 +1,7 @@
 package data;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 
 import javax.sql.DataSource;
-import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,18 +11,14 @@ import java.util.Collection;
 import java.util.List;
 
 public class ItemsDAOImpl implements ItemsDAO {
-    private MysqlDataSource dataSource;
+    private DataSource dataSource;
 
     public ItemsDAOImpl() {
-        dataSource = new MysqlDataSource();
-        dataSource.setServerName("localhost");
-        dataSource.setPortNumber(3306);
-        dataSource.setDatabaseName("dwads");
-        dataSource.setUser("root");
-        dataSource.setPassword("");
         try {
-            dataSource.getConnection();
-        } catch (SQLException e) {
+            InitialContext initialContext = new InitialContext();
+            Context env = (Context) initialContext.lookup("java:/comp/env");
+            dataSource = (DataSource) env.lookup("jdbc/db");
+        } catch (NamingException e) {
             e.printStackTrace();
         }
     }

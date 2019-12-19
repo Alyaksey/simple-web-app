@@ -5,7 +5,7 @@
             name="jdbc/db"
             auth="Container"
             type="javax.sql.DataSource"
-            driverClassName="com.mysql.jdbc.Driver"
+            driverClassName="com.mysql.cj.jdbc.Driver"
             url="jdbc:mysql://localhost/dwads?serverTimezone=UTC"
             username="root"
             password=""
